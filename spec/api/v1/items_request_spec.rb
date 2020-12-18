@@ -33,7 +33,7 @@ describe 'Items API', type: :request do
 
     get "/api/v1/items/#{id}"
 
-    item = JSON.parse(response.body, sumbolize_names: true)
+    item = JSON.parse(response.body, symbolize_names: true)
 
     expect(response).to be_successful
 
