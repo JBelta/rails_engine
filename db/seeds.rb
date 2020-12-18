@@ -22,7 +22,7 @@ items.each do |item|
   i.id = item["id"]
   i.name = item["name"]
   i.description = item["description"]
-  i.unit_price = item["unit_price"].to_f
+  i.unit_price = item["unit_price"]
   i.merchant_id = item["merchant_id"]
   i.save
 end
