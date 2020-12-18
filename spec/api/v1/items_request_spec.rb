@@ -79,9 +79,8 @@ describe 'Items API', type: :request do
       expect(new_item.merchant_id).to eq(merchant.id)
 
       #Delete an Item
-
       delete "/api/v1/items/#{new_item.id}"
-binding.pry
+
       expect(response).to be_successful
       expect(Item.count).to eq(0)
       expect{Item.find(new_item.id)}.to raise_error(ActiveRecord::RecordNotFound)
