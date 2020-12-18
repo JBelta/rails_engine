@@ -99,4 +99,13 @@ describe 'Items API', type: :request do
     expect(item.name).to_not eq(original_item)
     expect(item.name).to eq("NOT A NAME")
   end
+
+  it 'can get the merchant of a specific item' do
+    merchant = create(:merchant, :with_items)
+    item = merchant.items[0]
+
+    get "/api/v1/items/#{item.id}/merchants"
+
+    expect(response).to be_successful
+  end
 end
