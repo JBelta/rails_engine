@@ -3,5 +3,6 @@ FactoryBot.define do
     name {Faker::Commerce.product_name}
     description {Faker::Commerce.material}
     unit_price {Faker::Number.within(range: 1..10)}
+    merchant
   end
 end
