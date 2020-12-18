@@ -72,5 +72,10 @@ describe 'Items API', type: :request do
       new_item = Item.last
 
       expect(response).to be_successful
+      expect(new_item.name).to eq(item_params[:name])
+      expect(new_item.description).to eq(item_params[:description])
+      expect(new_item.unit_price).to eq(item_params[:unit_price])
+      expect(new_item.merchant_id).to eq(merchant.id)
+
   end
 end
