@@ -9,5 +9,11 @@ class Api::V1::ItemsController < ApplicationController
   end
 
   def create
-  end 
+    render json: Item.create(item_params)
+  end
+
+  private
+  def item_params
+    params.require(:items).permit(:name, :description, :unit_price, :merchant_id)
+  end
 end
