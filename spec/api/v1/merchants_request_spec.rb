@@ -48,8 +48,6 @@ describe 'Merchants API', type: :request do
 
     expect(response).to be_successful
     expect(new_merchant.name).to eq(merchant_params[:name])
-    expect(merchant).to have_key(:id)
-    expect(merchant[:id]).to be_an(Integer)
 
 
   end
