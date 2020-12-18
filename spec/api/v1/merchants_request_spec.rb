@@ -56,6 +56,20 @@ describe 'Merchants API', type: :request do
     expect{Merchant.find(new_merchant.id)}.to raise_error(ActiveRecord::RecordNotFound)
   end
 
+  it 'can update a merchant' do
+    id = create(:merchant).id
+    original_merchant = Merchant.last.name
+    merchant_params = {name: "No Old Name Here"}
+    headers = {'CONTENT_TYPE' => 'application/json'}
+
+    patch "/api/v1/merchants/#{id}", headers: headers, params: JSON.generate(merchants: merchant_params)
+    merchant = Merchant.find_by(id: id)
+
+    expect(response).to be_successful
+    expect(merchant.name).to_not eq(original_merchant)
+    expect(merchant.name).to eq("No Old Name Here")
+  end
+
   it 'can get a list of items from that merchant' do
     merchant = create(:merchant, :with_items)
 
