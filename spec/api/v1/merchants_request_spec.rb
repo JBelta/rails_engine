@@ -55,4 +55,10 @@ describe 'Merchants API', type: :request do
     expect(Merchant.count).to eq(0)
     expect{Merchant.find(new_merchant.id)}.to raise_error(ActiveRecord::RecordNotFound)
   end
+
+  it 'can get a list of items from that merchant' do
+    merchant = create(:merchant, :with_items)
+    
+    expect(merchant.items.count).to eq(3)
+  end
 end
