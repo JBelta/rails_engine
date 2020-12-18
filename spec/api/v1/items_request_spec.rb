@@ -85,4 +85,18 @@ describe 'Items API', type: :request do
       expect(Item.count).to eq(0)
       expect{Item.find(new_item.id)}.to raise_error(ActiveRecord::RecordNotFound)
   end
+
+  it "can update an item" do
+    id = create(:item).id
+    original_item = Item.last.name
+    item_params = {name: "NOT A NAME"}
+    headers = {'CONTENT_TYPE' => 'application/json'}
+
+    patch "/api/v1/items/#{id}", headers: headers, params: JSON.generate(items: item_params)
+    item = Item.find_by(id: id)
+
+    expect(response).to be_successful
+    expect(item.name).to_not eq(original_item)
+    expect(item.name).to eq("NOT A NAME")
+  end
 end
