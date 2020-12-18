@@ -49,6 +49,10 @@ describe 'Merchants API', type: :request do
     expect(response).to be_successful
     expect(new_merchant.name).to eq(merchant_params[:name])
 
+    #Delete a Merchant
 
+    delete "/api/v1/merchants/#{new_merchant.id}"
+    expect(Merchant.count).to eq(0)
+    expect{Merchant.find(new_merchant.id)}.to raise_error(ActiveRecord::RecordNotFound)
   end
 end
