@@ -36,4 +36,21 @@ describe 'Merchants API', type: :request do
     expect(merchant).to have_key(:name)
     expect(merchant[:name]).to be_an(String)
   end
+
+  it 'can create and destroy a merchant' do
+    #Create a Merchant
+    merchant_params = {name: 'Market'}
+
+    headers = {'CONTENT_TYPE' => 'application/json'}
+
+    post '/api/v1/merchants', headers: headers, params: JSON.generate(merchants: merchant_params)
+    new_merchant = Merchant.last
+
+    expect(response).to be_successful
+    expect(new_merchant.name).to eq(merchant_params[:name])
+    expect(merchant).to have_key(:id)
+    expect(merchant[:id]).to be_an(Integer)
+
+
+  end
 end
