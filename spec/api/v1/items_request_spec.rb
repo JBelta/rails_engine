@@ -58,17 +58,19 @@ describe 'Items API', type: :request do
   end
 
   it 'can create an item' do
+    merchant = create :merchant
     item_params = ({
       name: 'Coffee Beans',
       description: 'Bold and Robust',
       unit_price: 15.0,
+      merchant_id: merchant.id
       })
 
       headers = {'CONTENT_TYPE' => 'application/json'}
 
-      post '/api/v1/items', headers: headers, params: JSON.generate(item: item_params)
+      post '/api/v1/items', headers: headers, params: JSON.generate(items: item_params)
       new_item = Item.last
-binding.pry
+
       expect(response).to be_successful
   end
 end
